@@ -8,8 +8,8 @@ var options = {
 	disable : true, 
 	maxBlocks : Infinity, 
 	trashcan : true, 
-	horizontalLayout : false, 
-	toolboxPosition : 'start', 
+	horizontalLayout : true, 
+	toolboxPosition : 'end', 
 	css : true, 
 	media : 'media/', 
 	rtl : false, 
@@ -21,6 +21,14 @@ var options = {
 		length : 1, 
 		colour : '#888', 
 		snap : false
+	},
+	zoom : {
+		controls : true, 
+		wheel : true, 
+		startScale : 1, 
+		maxScale : 3, 
+		minScale : 0.3, 
+		scaleSpeed : 1.2
 	}
 };
 

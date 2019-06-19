@@ -1,0 +1,36 @@
+body {
+    font-family: 'Open Sans', Helvetica, sans-serif;
+    text-align: center;
+}
+
+.blocklyTreeLabel, .blocklyWidgetDiv, .blocklyHtmlInput, .blocklyText, .goog-menuitem-content {
+    font-family: 'Open Sans', Helvetica, sans-serif !important;
+}
+
+#controls {
+    border: blue 1px solid;
+}
+
+#blocklyDiv {
+    height: 500px; 
+    width: 500px;
+}
+
+#turtleDiv {
+    height: 500px; 
+    width: 500px;
+    border: red 1px solid;
+}
+
+.flex-outer {
+    display: flex;
+    flex-direction: column;
+    width: 1000px;
+    margin: 0 auto;
+    text-align: justify;
+}
+
+.flex-inner {
+    display: flex;
+    flex-direction: row;
+}
