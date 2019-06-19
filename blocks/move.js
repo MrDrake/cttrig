@@ -2,7 +2,7 @@ Blockly.Blocks['forward'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("forward");
-    this.appendValueInput("distance")
+    this.appendValueInput("DISTANCE")
         .setCheck("Number");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
@@ -17,7 +17,7 @@ Blockly.Blocks['turn'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("turn");
-    this.appendValueInput("NAME")
+    this.appendValueInput("ANGLE")
         .setCheck("Number");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);

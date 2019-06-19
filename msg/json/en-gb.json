@@ -122,7 +122,7 @@
 	"MATH_ARITHMETIC_TOOLTIP_DIVIDE": "Return the quotient of the two numbers.",
 	"MATH_ARITHMETIC_TOOLTIP_POWER": "Return the first number raised to the power of the second number.",
 	"MATH_SINGLE_HELPURL": "https://en.wikipedia.org/wiki/Square_root",
-	"MATH_SINGLE_OP_ROOT": "square root",
+	"MATH_SINGLE_OP_ROOT": "√",
 	"MATH_SINGLE_TOOLTIP_ROOT": "Return the square root of a number.",
 	"MATH_SINGLE_OP_ABSOLUTE": "absolute",
 	"MATH_SINGLE_TOOLTIP_ABS": "Return the absolute value of a number.",
