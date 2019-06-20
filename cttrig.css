@@ -8,12 +8,14 @@ body {
 }
 
 #controls {
+    padding: 8px;
     border: blue 1px solid;
 }
 
 #blocklyDiv {
     height: 500px; 
     width: 500px;
+    border: green 1px solid;
 }
 
 #turtleDiv {
@@ -33,4 +35,8 @@ body {
 .flex-inner {
     display: flex;
     flex-direction: row;
+}
+
+#tortoise {
+    display: none;
 }
