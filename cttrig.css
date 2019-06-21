@@ -7,21 +7,31 @@ body {
     font-family: 'Open Sans', Helvetica, sans-serif !important;
 }
 
-#controls {
+#instructions {
     padding: 8px;
-    border: blue 1px solid;
 }
 
 #blocklyDiv {
-    height: 500px; 
-    width: 500px;
-    border: green 1px solid;
+    height: 508px; 
+    width: 508px;
+    padding: 4px;
 }
 
 #turtleDiv {
-    height: 500px; 
-    width: 500px;
-    border: red 1px solid;
+    height: 508px; 
+    width: 508px;
+    padding: 4px;
+}
+
+#variables {
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    width: 1000px;
+}
+
+.var {
+    padding: 0 16px;
 }
 
 .flex-outer {
@@ -30,6 +40,8 @@ body {
     width: 1000px;
     margin: 0 auto;
     text-align: justify;
+    background-color: white;
+    border: black 1px solid;
 }
 
 .flex-inner {
