@@ -21,31 +21,35 @@ draw.image('reset.png', 25, 25)
     .click(function() {SaveCode()});*/
 
 function RunCode() {
-        var code = Blockly.JavaScript.workspaceToCode(workspace);
-        var varstr = "<p>&nbsp;</p>";
-        var x;
+    var code = Blockly.JavaScript.workspaceToCode(workspace);
+    var varstr = "<p>&nbsp;</p>";
+    var x;
+
+    for(x of workspace.getAllVariables()) {
+        varstr += '<p id="TurtleVar' + x.name + '" class="var"></p>';
+    }
     
-        for(x of workspace.getAllVariables()) {
-            varstr += '<p id="TurtleVar' + x.name + '" class="var"></p>';
+    var vars = document.getElementById('variables');
+    vars.innerHTML = varstr;
+
+    turtle.d = 0;
+
+    try {
+        eval(code);
+        if(level1.success()) {
+            alert("Well done!\nYou did it!");
+        } else {
+            alert("Not quite!\nTry again!");
         }
-        
-        var vars = document.getElementById('variables');
-        vars.innerHTML = varstr;
-    
-        turtle.d = 0;
-    
-        try {
-            eval(code);
-        } catch (e) {
-            alert(e);
-        }
+    } catch (e) {
+        alert(e);
+    }
 }
     
 function UpdateVariable(varname, value) {
     var element = document.getElementById('TurtleVar' + varname);
     element.innerHTML = '<em>' + varname + '</em> = ' + (+value.toFixed(6));
 }
-
 
 function ClearTurtle() {
     linegroup.clear();
@@ -57,6 +61,8 @@ function ClearTurtle() {
         p: true,
         s: null
     }   
+    level1.init();
+    document.getElementById('instructions').innerHTML = level1.text();
     turtle.s = linegroup.polygon(DrawTurtle());
 }
 
@@ -69,8 +75,8 @@ function DrawTurtle() {
 }
 
 function TurtleTurn(angle) {
-    turtle.a += angle;
-    var delay = angle / speed;
+    turtle.a -= angle;
+    var delay = Math.abs(angle) / speed;
     turtle.s.animate(delay, '<>', 0).plot(DrawTurtle());
     turtle.d += delay;
 }
@@ -83,12 +89,12 @@ function TurtleForward(distance) {
     if(turtle.p) {
         var x2 = turtle.x + svgwidth/2;
         var y2 = -turtle.y + svgheight/2;
-        var delay = distance / speed;
+        var delay = Math.abs(distance) / speed;
         linegroup.line(x1, y1, x1, y1).stroke({ width: 2, linecap: 'round' })
             .animate(delay, '<>', turtle.d).plot(x1, y1, x2, y2);
         turtle.s.animate(delay, '<>', 0).plot(DrawTurtle());
         turtle.d += delay;
-        }
+    }
 }
 
 function SaveCode() {
