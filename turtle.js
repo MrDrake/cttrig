@@ -2,7 +2,7 @@
 var svgwidth = 500;
 var svgheight = 500;
 var speed = 0.2;
-var colour = 'orange';
+var colour = 'black';
 
 // for accessing variables
 Blockly.JavaScript.addReservedWords('code');
@@ -10,9 +10,6 @@ Blockly.JavaScript.addReservedWords('code');
 // setup SVG and add linegroup for easy resetting
 var draw = SVG('turtleDiv').size(svgwidth, svgheight);
 var linegroup = draw.group();
-
-// current level
-var currentlevel = level1;
 
 // setup turtle object
 var turtle;
@@ -53,10 +50,12 @@ function RunCode() {
 
         // show feedback
         // todo: do we always need feedback?
-        if(currentlevel && currentlevel.success()) {  // todo: change to whatever level
-            alert("Well done!\nYou did it!");   
-        } else {
-            alert("Not quite!\nTry again!");
+        if(currentlevel) {
+            if(currentlevel.success()) {  // todo: change to whatever level
+                alert("Well done!\nYou did it!");   
+            } else {
+                alert("Not quite!\nTry again!");
+            }
         }
     } catch (e) {
         alert(e);   // shouldn't be any errors but you never know!
@@ -77,16 +76,23 @@ function ClearTurtle() {
 
     // set up turtle object
     turtle = {
-        x: 0, y: 0, a: 0,   // position and orientation
+        x: 0, y: 0, a: 90,  // position and orientation
         d: 0,               // delay
         p: true,            // is pen down?
         n: null, s: null    // sprites
     }   
 
     // initialise level and update text
-    currentlevel.init();
-    document.getElementById('leveltitle').innerHTML = currentlevel.name;
-    document.getElementById('instructions').innerHTML = currentlevel.text();
+    if(currentlevel) {
+        currentlevel.init();
+        document.getElementById('leveltitle').innerHTML = currentlevel.name;
+        document.getElementById('instructions').innerHTML = currentlevel.text();
+    } else {
+        document.getElementById('leveltitle').innerHTML = "Mr. Drake's Trig Game";
+        document.getElementById('instructions').innerHTML = "<p>Welcome to Mr. Drake's Trig Game!</p>\n"
+            + "<p>Your job is to solve some challenges by programming your avatar and using Trigonometry.</p>\n"
+            + "<p>Start playing around to get used to the controls before starting Level 1!</p>";
+    }
 
     // draw turtle sprite
     var x1 = turtle.x + svgwidth/2;
@@ -109,11 +115,11 @@ function TurtleTurn(angle) {
     if(turn < -180) turn += 360;
     if(turn > 180) turn -= 360;
 
-    turtle.s.animate(delay, '<>', turtle.d).rotate(turn);
+    turtle.s.animate(delay, '<>', 0).rotate(turn);
     // todo: fix occasional bug of extra rotation of sprite (multiple of 180?)
 
     // add to delay for animation
-    turtle.d += delay;
+    //turtle.d += delay;
 }
 
 // move turtle forward distance and animate sprite and path
@@ -132,7 +138,7 @@ function TurtleForward(distance) {
 
     // calculate delay and animate sprite
     var delay = Math.abs(distance) / speed;
-    turtle.n.animate(delay, '<>', turtle.d).move(x2, y2);
+    turtle.n.animate(delay, '<>', 0).move(x2, y2);
 
     // only draw path if pen down
     if(turtle.p) {

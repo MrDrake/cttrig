@@ -12,6 +12,10 @@ p {
     margin: 0;
 }
 
+#menu span {
+    margin: 0 8px;
+}
+
 #menu {
     background-color: lightgreen;
     padding: 8px;
