@@ -7,41 +7,68 @@ body {
     font-family: 'Open Sans', Helvetica, sans-serif !important;
 }
 
-#instructions {
+p {
+    padding: 0;
+    margin: 0;
+}
+
+#menu {
+    background-color: lightgreen;
     padding: 8px;
+    margin: 4px;
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+}
+
+#leveltitle {
+    background-color: white;
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+    padding: 8px;
+    margin: 4px;
+}
+
+#instructions {
+    background-color: yellow;
+    padding: 8px;
+    margin: 4px;
 }
 
 #blocklyDiv {
-    height: 508px; 
-    width: 508px;
-    padding: 4px;
+    height: 500px; 
+    width: 496px;
+    margin: 4px;
 }
 
 #turtleDiv {
-    height: 508px; 
-    width: 508px;
-    padding: 4px;
+    background-color: lightpink;
+    height: 500px; 
+    width: 500px;
+    margin: 4px;
 }
 
 #variables {
+    background-color: lightblue;
     display: flex;
     flex-direction: row;
     justify-content: stretch;
     width: 1000px;
+    margin: 4px;
 }
 
 .var {
-    padding: 0 16px;
+    padding: 8px;
 }
 
 .flex-outer {
     display: flex;
     flex-direction: column;
-    width: 1000px;
+    width: 1008px;
     margin: 0 auto;
     text-align: justify;
     background-color: white;
-    border: black 1px solid;
 }
 
 .flex-inner {
