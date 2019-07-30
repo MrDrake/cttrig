@@ -2,7 +2,7 @@
 var svgwidth = 500;
 var svgheight = 500;
 var speed = 0.2;
-var colour = 'black';
+var colour = 'red';
 
 // for accessing variables
 Blockly.JavaScript.addReservedWords('code');
@@ -76,7 +76,7 @@ function ClearTurtle() {
 
     // set up turtle object
     turtle = {
-        x: 0, y: 0, a: 90,  // position and orientation
+        x: 0, y: 0, a: 0,  // position and orientation
         d: 0,               // delay
         p: true,            // is pen down?
         n: null, s: null    // sprites
@@ -99,19 +99,19 @@ function ClearTurtle() {
     var y1 = -turtle.y + svgheight/2;
 
     turtle.n = linegroup.nested().center(x1, y1);
-    turtle.s = turtle.n.image('red.png', 32, 32).center(0, 0).rotate(90-turtle.a);
+    turtle.s = turtle.n.image('red.png', 32, 32).center(0, 0).rotate(turtle.a);
 }
 
 // turn turtle clockwise angle and animate sprite
 function TurtleTurn(angle) {
-    turtle.a -= angle;  // svg uses anti-clockwise but we want clockwise
+    turtle.a += angle;  // svg uses anti-clockwise but we want clockwise
     if(turtle.a < -180) turtle.a += 360;
     if(turtle.a > 180) turtle.a -= 360;
 
     var delay = Math.abs(angle) / speed;    // calculate delay for animation
     
     // angle to turn sprite
-    var turn = 90-turtle.a;
+    var turn = turtle.a;
     if(turn < -180) turn += 360;
     if(turn > 180) turn -= 360;
 
@@ -127,8 +127,8 @@ function TurtleForward(distance) {
     // calculate start of line
     var x1 = turtle.x + svgwidth/2;
     var y1 = -turtle.y + svgheight/2;
-    var dx = distance * Math.cos(turtle.a * Math.PI / 180);
-    var dy = distance * Math.sin(turtle.a * Math.PI / 180);
+    var dx = distance * dcos(turtle.a);
+    var dy = distance * dsin(turtle.a);
 
     // calculate end of line
     turtle.x += dx;

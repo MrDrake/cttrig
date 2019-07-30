@@ -17,7 +17,7 @@ p {
 }
 
 #menu {
-    background-color: lightgreen;
+    background-color: orange;
     padding: 8px;
     margin: 4px;
     display: flex;
@@ -47,7 +47,7 @@ p {
 }
 
 #turtleDiv {
-    background-color: lightpink;
+    background-color: #ccc;
     height: 500px; 
     width: 500px;
     margin: 4px;
