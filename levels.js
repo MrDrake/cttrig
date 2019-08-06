@@ -119,7 +119,7 @@ level4 = { name: "Level 4 &ndash; Pythagoras 1",
         drawblue(this.variables.x, this.variables.y);
     },
     text: function() {
-        return "<p>You moved " + this.variables.d1 + " m due North, while your friend moved "
+        return "<p>You walked " + this.variables.d1 + " m due North, while your friend walked "
             + this.variables.d2 + " m due East.</p>\n"
             + "<p>How far away is your friend?</p>"
     },
@@ -148,7 +148,7 @@ level5 = { name: "Level 5 &ndash; Pythagoras 2",
         drawblue(this.variables.x, this.variables.y);
     },
     text: function() {
-        return "<p>You moved " + this.variables.d1 + " m due North, while your friend moved "
+        return "<p>You walked " + this.variables.d1 + " m due North, while your friend walked "
             + this.variables.d2 + " m.  Your friend is now due East of you.</p>\n"
             + "<p>How far away is your friend?</p>"
     },
@@ -157,7 +157,189 @@ level5 = { name: "Level 5 &ndash; Pythagoras 2",
     }
 };
 
-leveln11 = { name: "Level n-1 &ndash; Sine Rule (Side Form) 1",
+level6 = { name: "Level 6 &ndash; Right-Angled Triangles 1",
+    variables: {d1:0, d2:0, x:0, y:0},
+    init: function() {
+        this.variables.d1 = randint(100, 250, 5);
+        this.variables.d2 = randint(100, 250, 5);
+
+        turtle.a = 0;
+        turtle.x = -100;
+        turtle.y = -100;
+
+        this.variables.x = turtle.x + this.variables.d2;
+        this.variables.y = turtle.y + this.variables.d1;
+
+        drawline(turtle.x, turtle.y, turtle.x, turtle.y + this.variables.d1, 'blue');
+        drawline(turtle.x, turtle.y + this.variables.d1, turtle.x + this.variables.d2, turtle.y + this.variables.d1, 'blue');
+        drawblue(this.variables.x, this.variables.y);
+    },
+    text: function() {
+        return "<p>Your friend walked " + this.variables.d1 + " m due North, then " + this.variables.d2 + " m due East.</p>\n"
+            + "<p>How do you move to your friend?</p>"
+    },
+    success: function() {
+      return Math.abs(turtle.x-this.variables.x) < 0.01 && Math.abs(turtle.y-this.variables.y) < 0.01;
+    }
+};
+
+level7 = { name: "Level 7 &ndash; Right-Angled Triangles 2",
+    variables: {d1:0, b:0, x:0, y:0},
+    init: function() {
+        this.variables.d1 = randint(100, 150, 5);
+        this.variables.b = randint(30, 60, 5);
+    
+        var d2 = this.variables.d1 * Math.tan(this.variables.b * Math.PI/180);
+
+        turtle.a = 90;
+        turtle.x = -100;
+        turtle.y = -100;
+
+        this.variables.x = turtle.x + d2;
+        this.variables.y = turtle.y + this.variables.d1;
+
+        drawline(turtle.x, turtle.y, turtle.x, turtle.y + this.variables.d1, 'red');
+        drawline(turtle.x, turtle.y, this.variables.x, this.variables.y, 'blue');
+        drawblue(this.variables.x, this.variables.y);
+        
+        turtle.y += this.variables.d1;
+    },
+    text: function() {
+        return "<p>You walked " + this.variables.d1 + " m due North, while your friend walked at a bearing of "
+            + this.variables.b + "&deg;.  Your friend is now due East of you.</p>\n"
+            + "<p>How far away is your friend?</p>"
+    },
+    success: function() {
+      return Math.abs(turtle.x-this.variables.x) < 0.01 && Math.abs(turtle.y-this.variables.y) < 0.01;
+    }
+};
+
+level8 = { name: "Level 8 &ndash; Right-Angled Triangles 3",
+    variables: {d1:0, b:0, x:0, y:0},
+    init: function() {
+        this.variables.d1 = randint(150, 200, 5);
+        this.variables.b = randint(30, 60, 5);
+    
+        var d2 = this.variables.d1 / Math.tan(this.variables.b * Math.PI/180);
+
+        turtle.a = 0;
+        turtle.x = -100;
+        turtle.y = -100;
+
+        this.variables.x = turtle.x;
+        this.variables.y = turtle.y + d2;
+
+        drawline(turtle.x, turtle.y, turtle.x + this.variables.d1, this.variables.y, 'blue');
+        drawline(turtle.x + this.variables.d1, this.variables.y, this.variables.x, this.variables.y, 'blue');
+        drawblue(this.variables.x, this.variables.y);
+    },
+    text: function() {
+        return "<p>Your friend started at a bearing of " + this.variables.b + "&deg;, then walked " + this.variables.d1
+            + " m due West.  He is now due North of you.</p>\n"
+            + "<p>How far away is your friend?</p>"
+    },
+    success: function() {
+      return Math.abs(turtle.x-this.variables.x) < 0.01 && Math.abs(turtle.y-this.variables.y) < 0.01;
+    }
+};
+
+level9 = { name: "Level 9 &ndash; Right-Angled Triangles 4",
+    variables: {o:0, h:0, x:0, y:0},
+    init: function() {
+        this.variables.o = randint(100, 150, 5);
+        this.variables.h = this.variables.o + randint(50, 150, 5);
+
+        var b = Math.asin(this.variables.o/this.variables.h)*180/Math.PI;
+
+        turtle.a = 90-b;
+        turtle.x = -100;
+        turtle.y = -100;
+
+        var a = Math.sqrt(this.variables.h*this.variables.h - this.variables.o*this.variables.o);
+
+        this.variables.x = turtle.x;
+        this.variables.y = turtle.y + this.variables.o;
+
+        drawline(turtle.x, turtle.y, this.variables.x, this.variables.y, 'blue');
+        drawline(turtle.x, turtle.y, turtle.x + a, this.variables.y, 'red');
+        drawblue(this.variables.x, this.variables.y);
+
+        turtle.x += a;
+        turtle.y += this.variables.o;
+    },
+    text: function() {
+        return "<p>Your friend walked " + this.variables.o + " m due North, while you walked " + this.variables.h
+            + " m.  Your friend is now due West of you.</p>\n"
+            + "<p>How do you move to your friend?</p>"
+    },
+    success: function() {
+      return Math.abs(turtle.x-this.variables.x) < 0.01 && Math.abs(turtle.y-this.variables.y) < 0.01;
+    }
+};
+
+level10 = { name: "Level 10 &ndash; Right-Angled Triangles 5",
+    variables: {b:0, h:0, x:0, y:0},
+    init: function() {
+        this.variables.b = randint(30, 70, 5);
+        this.variables.h = randint(150, 250, 5);
+
+        turtle.a = 90;
+        turtle.x = -100;
+        turtle.y = -100;
+
+        var o = this.variables.h * Math.sin(this.variables.b * Math.PI/180);
+        var a = Math.sqrt(this.variables.h*this.variables.h - o*o);
+
+        this.variables.x = turtle.x + o;
+        this.variables.y = turtle.y + a;
+
+        drawline(turtle.x, turtle.y, this.variables.x, this.variables.y, 'blue');
+        drawline(turtle.x, turtle.y, turtle.x, this.variables.y, 'red');
+        drawblue(this.variables.x, this.variables.y);
+
+        turtle.y += a;
+    },
+    text: function() {
+        return "<p>Your friend walked " + this.variables.h + " m at a bearing of " + this.variables.b 
+            + "&deg;, while you walked due North.  Your friend is now due East of you.</p>\n"
+            + "<p>How far away is your friend?</p>"
+    },
+    success: function() {
+      return Math.abs(turtle.x-this.variables.x) < 0.01 && Math.abs(turtle.y-this.variables.y) < 0.01;
+    }
+};
+
+level11 = { name: "Level 11 &ndash; Right-Angled Triangles 6",
+    variables: {b:0, o:0, x:0, y:0},
+    init: function() {
+        this.variables.b = randint(30, 70, 5);
+        this.variables.o = randint(100, 150, 5);
+
+        turtle.a = this.variables.b;
+        turtle.x = -100;
+        turtle.y = -100;
+
+        var h = this.variables.o / Math.sin(this.variables.b * Math.PI/180);
+        var a = Math.sqrt(h*h - this.variables.o*this.variables.o);
+
+        this.variables.x = turtle.x + this.variables.o;
+        this.variables.y = turtle.y + a;
+
+        drawline(turtle.x, turtle.y, turtle.x, this.variables.y, 'blue');
+        drawline(turtle.x, this.variables.y, this.variables.x, this.variables.y, 'blue');
+        drawblue(this.variables.x, this.variables.y);
+    },
+    text: function() {
+        return "<p>Your friend walked due North, then " + this.variables.o + " m due East. He is now at a bearing of " 
+            + this.variables.b + "&deg; from you.</p>\n"
+            + "<p>How far away is your friend?</p>"
+    },
+    success: function() {
+      return Math.abs(turtle.x-this.variables.x) < 0.01 && Math.abs(turtle.y-this.variables.y) < 0.01;
+    }
+};
+
+level15 = { name: "Level 15 &ndash; Sine Rule (Side Form) 1",
     variables: {d:0, b1:0, b2:0, x:0, y:0},
     init: function() {
         this.variables.d = randint(50, 100, 5);
@@ -317,9 +499,9 @@ leveln3 = { name: "Level n+3 &ndash; Using what you know 2",
     }
 };
 
-var levels = {"Start": null, "Level 1": level1, "Level 2": level2, "Level 3": level3, "Level 4": level4,
-    "Level 5": level5, "Level n-1": leveln11, "Level n": leveln, "Level n+1": leveln1, 
-    "Level n+2": leveln2, "Level n+3": leveln3}
+var levels = {"Start": null, "Level 1": level1, "Level 2": level2, "Level 3": level3, "Level 4": level4, "Level 5": level5, 
+    "Level 6": level6, "Level 7": level7, "Level 8": level8, "Level 9": level9, "Level 10": level10, "Level 11": level11,
+    "Level 15": level15, "Level n": leveln, "Level n+1": leveln1, "Level n+2": leveln2, "Level n+3": leveln3}
 var currentlevel = null;
 setlevel = function(lev) {
     currentlevel = levels[lev];
