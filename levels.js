@@ -575,4 +575,5 @@ var menutext = "";
 for(lev in levels) {
     menutext += "<span><a href='#" + lev + "' onclick='setlevel(\"" + lev + "\");'>" + lev + "</a></span>\n";
 };
+menutext += "<span><a href='https://t34.ch/trighints'>Hints</a></span>";
 element.innerHTML = menutext;
