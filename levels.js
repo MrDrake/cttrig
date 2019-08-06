@@ -339,6 +339,67 @@ level11 = { name: "Level 11 &ndash; Right-Angled Triangles 6",
     }
 };
 
+level13 = { name: "Level 13 &ndash; Right-Angled Triangles 8",
+    variables: {d1:0, b:0, x:0, y:0},
+    init: function() {
+        this.variables.d1 = randint(200, 250, 5);
+        this.variables.b = randint(30, 60, 5);
+    
+        var a = this.variables.d1 * Math.cos(this.variables.b * Math.PI/180);
+        var o = this.variables.d1 * Math.sin(this.variables.b * Math.PI/180);
+
+        turtle.a = 0;
+        turtle.x = -100;
+        turtle.y = -100;
+
+        this.variables.x = turtle.x;
+        this.variables.y = turtle.y + a;
+
+        drawline(turtle.x, turtle.y, turtle.x + o, this.variables.y, 'blue');
+        drawline(turtle.x + o, this.variables.y, this.variables.x, this.variables.y, 'blue');
+        drawblue(this.variables.x, this.variables.y);
+    },
+    text: function() {
+        return "<p>Your friend walked " + this.variables.d1 + " m at a bearing of " + this.variables.b 
+            + "&deg;, then walked due West.  He is now due North of you.</p>\n"
+            + "<p>How far away is your friend?</p>"
+    },
+    success: function() {
+      return Math.abs(turtle.x-this.variables.x) < 0.01 && Math.abs(turtle.y-this.variables.y) < 0.01;
+    }
+};
+
+level14 = { name: "Level 14 &ndash; Right-Angled Triangles 9",
+    variables: {b:0, o:0, x:0, y:0},
+    init: function() {
+        this.variables.b = randint(20, 60, 5);
+        this.variables.a = randint(100, 150, 5);
+
+        turtle.a = this.variables.b;
+        turtle.x = -100;
+        turtle.y = -100;
+
+        var h = this.variables.a / Math.cos(this.variables.b * Math.PI/180);
+        var o = Math.sqrt(h*h - this.variables.a*this.variables.a);
+
+        this.variables.x = turtle.x + o;
+        this.variables.y = turtle.y + this.variables.a;
+
+        drawline(turtle.x, turtle.y, turtle.x, this.variables.y, 'blue');
+        drawline(turtle.x, this.variables.y, this.variables.x, this.variables.y, 'blue');
+        drawblue(this.variables.x, this.variables.y);
+    },
+    text: function() {
+        return "<p>Your friend walked " + this.variables.a + " m due North, then due East. He is now at a bearing of " 
+            + this.variables.b + "&deg; from you.</p>\n"
+            + "<p>How far away is your friend?</p>"
+    },
+    success: function() {
+      return Math.abs(turtle.x-this.variables.x) < 0.01 && Math.abs(turtle.y-this.variables.y) < 0.01;
+    }
+};
+
+
 level15 = { name: "Level 15 &ndash; Sine Rule (Side Form) 1",
     variables: {d:0, b1:0, b2:0, x:0, y:0},
     init: function() {
@@ -371,7 +432,7 @@ level15 = { name: "Level 15 &ndash; Sine Rule (Side Form) 1",
     }
 };
 
-leveln = { name: "Level n &ndash; Cosine Rule (Side Form) 1",
+level19 = { name: "Level 19 &ndash; Cosine Rule (Side Form) 1",
     variables: {d1:0, d2:0, b:0, x:0, y:0},
     init: function() {
         this.variables.d1 = randint(100, 150, 5);
@@ -403,7 +464,7 @@ leveln = { name: "Level n &ndash; Cosine Rule (Side Form) 1",
     }
 };
 
-leveln1 = { name: "Level n+1 &ndash; Cosine Rule (Side Form) 2",
+level20 = { name: "Level 20 &ndash; Cosine Rule (Side Form) 2",
     variables: {d1:0, d2:0, b:0, x:0, y:0},
     init: function() {
         this.variables.d1 = randint(150, 250, 5);
@@ -436,7 +497,7 @@ leveln1 = { name: "Level n+1 &ndash; Cosine Rule (Side Form) 2",
     }
 };
 
-leveln2 = { name: "Level n+2 &ndash; Using what you know 1",
+level23 = { name: "Level 23 &ndash; Using what you know 1",
     variables: {d1:0, d2:0, b:0, x:0, y:0},
     init: function() {
         this.variables.d1 = randint(50, 100, 5);
@@ -467,7 +528,7 @@ leveln2 = { name: "Level n+2 &ndash; Using what you know 1",
     }
 };
 
-leveln3 = { name: "Level n+3 &ndash; Using what you know 2",
+level24 = { name: "Level 24 &ndash; Using what you know 2",
     variables: {d1:0, d2:0, b:0, x:0, y:0},
     init: function() {
         this.variables.d1 = randint(50, 150, 5);
@@ -501,7 +562,8 @@ leveln3 = { name: "Level n+3 &ndash; Using what you know 2",
 
 var levels = {"Start": null, "Level 1": level1, "Level 2": level2, "Level 3": level3, "Level 4": level4, "Level 5": level5, 
     "Level 6": level6, "Level 7": level7, "Level 8": level8, "Level 9": level9, "Level 10": level10, "Level 11": level11,
-    "Level 15": level15, "Level n": leveln, "Level n+1": leveln1, "Level n+2": leveln2, "Level n+3": leveln3}
+    "Level 13": level13, "Level 14": level14,
+    "Level 15": level15, "Level 19": level19, "Level 20": level20, "Level 23": level23, "Level 24": level24}
 var currentlevel = null;
 setlevel = function(lev) {
     currentlevel = levels[lev];
