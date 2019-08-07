@@ -188,6 +188,7 @@ level7 = { name: "Level 7 &ndash; Right-Angled Triangles 2",
     init: function() {
         this.variables.d1 = randint(100, 150, 5);
         this.variables.b = randint(30, 60, 5);
+        if(this.variables.b == 45) this.variables.b = 50;
     
         var d2 = this.variables.d1 * Math.tan(this.variables.b * Math.PI/180);
 
@@ -219,6 +220,7 @@ level8 = { name: "Level 8 &ndash; Right-Angled Triangles 3",
     init: function() {
         this.variables.d1 = randint(150, 200, 5);
         this.variables.b = randint(30, 60, 5);
+        if(this.variables.b == 45) this.variables.b = 50;
     
         var d2 = this.variables.d1 / Math.tan(this.variables.b * Math.PI/180);
 
@@ -281,6 +283,7 @@ level10 = { name: "Level 10 &ndash; Right-Angled Triangles 5",
     variables: {b:0, h:0, x:0, y:0},
     init: function() {
         this.variables.b = randint(30, 70, 5);
+        if(this.variables.b == 45) this.variables.b = 50;
         this.variables.h = randint(150, 250, 5);
 
         turtle.a = 90;
@@ -313,6 +316,7 @@ level11 = { name: "Level 11 &ndash; Right-Angled Triangles 6",
     variables: {b:0, o:0, x:0, y:0},
     init: function() {
         this.variables.b = randint(30, 70, 5);
+        if(this.variables.b == 45) this.variables.b = 50;
         this.variables.o = randint(100, 150, 5);
 
         turtle.a = this.variables.b;
@@ -344,6 +348,7 @@ level13 = { name: "Level 13 &ndash; Right-Angled Triangles 8",
     init: function() {
         this.variables.d1 = randint(200, 250, 5);
         this.variables.b = randint(30, 60, 5);
+        if(this.variables.b == 45) this.variables.b = 50;
     
         var a = this.variables.d1 * Math.cos(this.variables.b * Math.PI/180);
         var o = this.variables.d1 * Math.sin(this.variables.b * Math.PI/180);
@@ -373,6 +378,7 @@ level14 = { name: "Level 14 &ndash; Right-Angled Triangles 9",
     variables: {b:0, o:0, x:0, y:0},
     init: function() {
         this.variables.b = randint(20, 60, 5);
+        if(this.variables.b == 45) this.variables.b = 50;
         this.variables.a = randint(100, 150, 5);
 
         turtle.a = this.variables.b;
