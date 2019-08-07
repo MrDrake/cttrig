@@ -162,6 +162,7 @@ level6 = { name: "Level 6 &ndash; Right-Angled Triangles 1",
     init: function() {
         this.variables.d1 = randint(100, 250, 5);
         this.variables.d2 = randint(100, 250, 5);
+        if(this.variables.d1 == this.variables.d2) this.variables.d2 += 5;
 
         turtle.a = 0;
         turtle.x = -100;
