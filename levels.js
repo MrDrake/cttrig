@@ -177,7 +177,7 @@ level6 = { name: "Level 6 &ndash; Right-Angled Triangles 1",
     },
     text: function() {
         return "<p>Your friend walked " + this.variables.d1 + " m due North, then " + this.variables.d2 + " m due East.</p>\n"
-            + "<p>How do you move to your friend?</p>"
+            + "<p>How do you move to your friend in the shortest way?</p>"
     },
     success: function() {
       return Math.abs(turtle.x-this.variables.x) < 0.01 && Math.abs(turtle.y-this.variables.y) < 0.01;
@@ -338,6 +338,35 @@ level11 = { name: "Level 11 &ndash; Right-Angled Triangles 6",
         return "<p>Your friend walked due North, then " + this.variables.o + " m due East. He is now at a bearing of " 
             + this.variables.b + "&deg; from you.</p>\n"
             + "<p>How far away is your friend?</p>"
+    },
+    success: function() {
+      return Math.abs(turtle.x-this.variables.x) < 0.01 && Math.abs(turtle.y-this.variables.y) < 0.01;
+    }
+};
+
+level12 = { name: "Level 12 &ndash; Right-Angled Triangles 7",
+    variables: {a:0, h:0, x:0, y:0},
+    init: function() {
+        this.variables.a = randint(150, 200, 5);
+        this.variables.h = this.variables.a + randint(50, 100, 5);
+
+        turtle.a = 180;
+        turtle.x = -100;
+        turtle.y = -100;
+
+        var o = Math.sqrt(this.variables.h*this.variables.h - this.variables.a*this.variables.a);
+
+        this.variables.x = turtle.x + o;
+        this.variables.y = turtle.y + this.variables.a;
+
+        drawline(turtle.x, turtle.y, turtle.x, this.variables.y, 'red');
+        drawline(turtle.x, turtle.y, this.variables.x, this.variables.y, 'blue');
+        drawblue(this.variables.x, this.variables.y);
+    },
+    text: function() {
+        return "<p>You walked " + this.variables.a + " m due South to your friend, but he walked "
+            + this.variables.h + " m away, and is now due East of where you started.</p>\n"
+            + "<p>How do you move to your friend in the shortest way?</p>"
     },
     success: function() {
       return Math.abs(turtle.x-this.variables.x) < 0.01 && Math.abs(turtle.y-this.variables.y) < 0.01;
@@ -569,8 +598,8 @@ level24 = { name: "Level 24 &ndash; Using what you know 2",
 
 var levels = {"Start": null, "Level 1": level1, "Level 2": level2, "Level 3": level3, "Level 4": level4, "Level 5": level5, 
     "Level 6": level6, "Level 7": level7, "Level 8": level8, "Level 9": level9, "Level 10": level10, "Level 11": level11,
-    "Level 13": level13, "Level 14": level14,
-    "Level 15": level15, "Level 19": level19, "Level 20": level20, "Level 23": level23, "Level 24": level24}
+    "Level 12": level12, "Level 13": level13, "Level 14": level14, "Level 15": level15, 
+    "Level 19": level19, "Level 20": level20, "Level 23": level23, "Level 24": level24}
 var currentlevel = null;
 setlevel = function(lev) {
     currentlevel = levels[lev];
