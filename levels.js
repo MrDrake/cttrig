@@ -439,28 +439,58 @@ level14 = { name: "Level 14 &ndash; Right-Angled Triangles 9",
 level15 = { name: "Level 15 &ndash; Sine Rule (Side Form) 1",
     variables: {d:0, b1:0, b2:0, x:0, y:0},
     init: function() {
-        this.variables.d = randint(50, 100, 5);
-        this.variables.b1 = randint(45, 65, 5);
-        this.variables.b2 = this.variables.b1 + randint(15, 20, 5);
+        this.variables.d = randint(250, 350, 5);
+        this.variables.b1 = randint(30, 60, 5);
+        this.variables.b2 = this.variables.b1 + randint(10, 25, 5);
 
-        var d1 = sineside(180-this.variables.b2, this.variables.b2-this.variables.b1, this.variables.d);
+        var d1 = sineside(this.variables.b2-this.variables.b1, 180-this.variables.b2, this.variables.d);
 
         turtle.a = this.variables.b2;
         turtle.x = -150;
         turtle.y = -150;
 
-        this.variables.x = d1 * dcos(this.variables.b1) + turtle.x;
-        this.variables.y = d1 * dsin(this.variables.b1) + turtle.y;
+        this.variables.x = this.variables.d * dcos(this.variables.b1) + turtle.x;
+        this.variables.y = this.variables.d * dsin(this.variables.b1) + turtle.y;
 
-        drawline(turtle.x, turtle.y, turtle.x, turtle.y + this.variables.d, 'red');
+        drawline(turtle.x, turtle.y, turtle.x, turtle.y + d1, 'red');
         drawline(turtle.x, turtle.y, this.variables.x, this.variables.y, 'blue');
         drawblue(this.variables.x, this.variables.y);
 
-        turtle.y += this.variables.d;
+        turtle.y += d1;
     },
     text: function() {
-        return "<p>Your friend walked at a bearing of " + this.variables.b1 + "&deg;. You then walked "
-            + this.variables.d + " m due North.  Your friend now has a bearing of " + this.variables.b2 + "&deg.<p>\n"
+        return "<p>Your friend walked " + this.variables.d + " m at a bearing of " + this.variables.b1 + 
+            "&deg;. You then walked due North.  Your friend now has a bearing of " + this.variables.b2 + "&deg.<p>\n"
+            + "<p>How far away is your friend?</p>";
+    },
+    success: function() {
+        return Math.abs(turtle.x-this.variables.x) < 0.01 && Math.abs(turtle.y-this.variables.y) < 0.01;
+    }
+};
+
+level16 = { name: "Level 16 &ndash; Sine Rule (Side Form) 2",
+    variables: {d:0, b1:0, b2:0, x:0, y:0},
+    init: function() {
+        this.variables.d = randint(200, 300, 5);
+        this.variables.b1 = randint(100, 150, 5);
+        this.variables.b2 = randint(60, 80, 5);
+
+        var d1 = sineside(this.variables.b1-this.variables.b2, this.variables.b2, this.variables.d);
+
+        turtle.a = this.variables.b2;
+        turtle.x = -150;
+        turtle.y = -150;
+
+        this.variables.x = this.variables.d * dcos(this.variables.b1) + turtle.x;
+        this.variables.y = this.variables.d * dsin(this.variables.b1) + turtle.y + d1;
+
+        drawline(turtle.x, turtle.y, turtle.x, turtle.y + d1, 'blue');
+        drawline(turtle.x, turtle.y + d1, this.variables.x, this.variables.y, 'blue');
+        drawblue(this.variables.x, this.variables.y);
+    },
+    text: function() {
+        return "<p>Your friend walked due North, then walked " + this.variables.d + " m at a bearing of " + this.variables.b1 + 
+            "&deg;. Your friend now has a bearing of " + this.variables.b2 + "&deg.<p>\n"
             + "<p>How far away is your friend?</p>";
     },
     success: function() {
@@ -598,7 +628,7 @@ level24 = { name: "Level 24 &ndash; Using what you know 2",
 
 var levels = {"Start": null, "Level 1": level1, "Level 2": level2, "Level 3": level3, "Level 4": level4, "Level 5": level5, 
     "Level 6": level6, "Level 7": level7, "Level 8": level8, "Level 9": level9, "Level 10": level10, "Level 11": level11,
-    "Level 12": level12, "Level 13": level13, "Level 14": level14, "Level 15": level15, 
+    "Level 12": level12, "Level 13": level13, "Level 14": level14, "Level 15": level15, "Level 16": level16, 
     "Level 19": level19, "Level 20": level20, "Level 23": level23, "Level 24": level24}
 var currentlevel = null;
 setlevel = function(lev) {
