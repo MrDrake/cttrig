@@ -680,7 +680,7 @@ level22 = { name: "Level 22 &ndash; Cosine Rule (Angle Form) 2",
         drawblue(this.variables.x, this.variables.y);
     },
     text: function() {
-        return "<p>You walked " + this.variables.d1 + " m due North, then "
+        return "<p>Your friend walked " + this.variables.d1 + " m due North, then "
             + this.variables.d3 + " m in a different direction.  He is now " + this.variables.d2 + " m away.</p>"
             + "<p>How do you move to your friend?</p>";
     },
