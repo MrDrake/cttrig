@@ -498,6 +498,70 @@ level16 = { name: "Level 16 &ndash; Sine Rule (Side Form) 2",
     }
 };
 
+level17 = { name: "Level 17 &ndash; Sine Rule (Angle Form) 1",
+    variables: {d1:0, d2:0, b:0, x:0, y:0},
+    init: function() {
+        this.variables.d1 = randint(200, 250, 5);
+        this.variables.d2 = this.variables.d1 + randint(5, 50, 5);
+        this.variables.b = randint(60, 80, 5);
+
+        var b1 = sineangle(this.variables.d1, this.variables.d2, this.variables.b);
+        var d3 = sineside(180-this.variables.b-b1, this.variables.b, this.variables.d2);
+
+        turtle.a = 0;
+        turtle.x = -100;
+        turtle.y = -150;
+
+        this.variables.x = this.variables.d1 * dcos(this.variables.b) + turtle.x;
+        this.variables.y = this.variables.d1 * dsin(this.variables.b) + turtle.y;
+
+        drawline(turtle.x, turtle.y, turtle.x, turtle.y + d3, 'red');
+        drawline(turtle.x, turtle.y, this.variables.x, this.variables.y, 'blue');
+        drawblue(this.variables.x, this.variables.y);
+
+        turtle.y += d3;
+    },
+    text: function() {
+        return "<p>Your friend walked " + this.variables.d1 + " m at a bearing of " + this.variables.b + 
+            "&deg;. You walked due North.  Your friend is now " + this.variables.d2 + " m away.<p>\n"
+            + "<p>How do you move to your friend?</p>";
+    },
+    success: function() {
+        return Math.abs(turtle.x-this.variables.x) < 0.01 && Math.abs(turtle.y-this.variables.y) < 0.01;
+    }
+};
+
+level18 = { name: "Level 18 &ndash; Sine Rule (Angle Form) 2",
+    variables: {d1:0, d2:0, b:0, x:0, y:0},
+    init: function() {
+        this.variables.d1 = randint(200, 250, 5);
+        this.variables.d2 = this.variables.d1 + randint(5, 50, 5);
+        this.variables.b = randint(60, 80, 5);
+
+        var b1 = sineangle(this.variables.d1, this.variables.d2, this.variables.b);
+        var d3 = sineside(180-this.variables.b-b1, this.variables.b, this.variables.d2);
+
+        turtle.a = 0;
+        turtle.x = -100;
+        turtle.y = -150;
+
+        this.variables.x = this.variables.d2 * dcos(b1) + turtle.x;
+        this.variables.y = this.variables.d2 * dsin(b1) + turtle.y;
+
+        drawline(turtle.x, turtle.y, turtle.x, turtle.y + d3, 'blue');
+        drawline(turtle.x, turtle.y + d3, this.variables.x, this.variables.y, 'blue');
+        drawblue(this.variables.x, this.variables.y);
+    },
+    text: function() {
+        return "<p>Your friend walked due North, then " + this.variables.d1 + " m at a bearing of " 
+            + (180-this.variables.b) + "&deg;. Your friend is now " + this.variables.d2 + " m away.<p>\n"
+            + "<p>How do you move to your friend?</p>";
+    },
+    success: function() {
+        return Math.abs(turtle.x-this.variables.x) < 0.01 && Math.abs(turtle.y-this.variables.y) < 0.01;
+    }
+};
+
 level19 = { name: "Level 19 &ndash; Cosine Rule (Side Form) 1",
     variables: {d1:0, d2:0, b:0, x:0, y:0},
     init: function() {
@@ -557,6 +621,68 @@ level20 = { name: "Level 20 &ndash; Cosine Rule (Side Form) 2",
         return "<p>You walked " + this.variables.d1 + " m due North, while your friend walked "
             + this.variables.d2 + " m at a bearing of " + this.variables.b + "&deg;.</p>"
             + "<p>How far away is your friend?</p>";
+    },
+    success: function() {
+        return Math.abs(turtle.x-this.variables.x) < 0.01 && Math.abs(turtle.y-this.variables.y) < 0.01;
+    }
+};
+
+level21 = { name: "Level 21 &ndash; Cosine Rule (Angle Form) 1",
+    variables: {d1:0, d2:0, b:0, x:0, y:0},
+    init: function() {
+        this.variables.d1 = randint(150, 250, 5);
+        this.variables.d2 = randint(150, 250, 5);
+        this.variables.d3 = randint(150, 250, 5);
+
+        var b = cosineangle(this.variables.d3, this.variables.d2, this.variables.d1);
+
+        turtle.a = 0;
+        turtle.x = -100;
+        turtle.y = -100;
+
+        this.variables.x = this.variables.d2 * dcos(b) + turtle.x;
+        this.variables.y = this.variables.d2 * dsin(b) + turtle.y;
+
+        drawline(turtle.x, turtle.y, turtle.x, turtle.y + this.variables.d1, 'red');
+        drawline(turtle.x, turtle.y, this.variables.x, this.variables.y, 'blue');
+        drawblue(this.variables.x, this.variables.y);
+
+        turtle.y += this.variables.d1;
+    },
+    text: function() {
+        return "<p>You walked " + this.variables.d1 + " m due North, while your friend walked "
+            + this.variables.d2 + " m in a different direction.  Your friend is now " + this.variables.d3 + " m away.</p>"
+            + "<p>How do you move to your friend?</p>";
+    },
+    success: function() {
+        return Math.abs(turtle.x-this.variables.x) < 0.01 && Math.abs(turtle.y-this.variables.y) < 0.01;
+    }
+};
+
+level22 = { name: "Level 22 &ndash; Cosine Rule (Angle Form) 2",
+    variables: {d1:0, d2:0, b:0, x:0, y:0},
+    init: function() {
+        this.variables.d1 = randint(150, 250, 5);
+        this.variables.d2 = randint(150, 250, 5);
+        this.variables.d3 = randint(150, 250, 5);
+
+        var b = cosineangle(this.variables.d3, this.variables.d2, this.variables.d1);
+
+        turtle.a = 0;
+        turtle.x = -100;
+        turtle.y = -100;
+
+        this.variables.x = this.variables.d2 * dcos(b) + turtle.x;
+        this.variables.y = this.variables.d2 * dsin(b) + turtle.y;
+
+        drawline(turtle.x, turtle.y, turtle.x, turtle.y + this.variables.d1, 'blue');
+        drawline(turtle.x, turtle.y + this.variables.d1, this.variables.x, this.variables.y, 'blue');
+        drawblue(this.variables.x, this.variables.y);
+    },
+    text: function() {
+        return "<p>You walked " + this.variables.d1 + " m due North, then "
+            + this.variables.d3 + " m in a different direction.  He is now " + this.variables.d2 + " m away.</p>"
+            + "<p>How do you move to your friend?</p>";
     },
     success: function() {
         return Math.abs(turtle.x-this.variables.x) < 0.01 && Math.abs(turtle.y-this.variables.y) < 0.01;
@@ -628,8 +754,9 @@ level24 = { name: "Level 24 &ndash; Using what you know 2",
 
 var levels = {"Start": null, "Level 1": level1, "Level 2": level2, "Level 3": level3, "Level 4": level4, "Level 5": level5, 
     "Level 6": level6, "Level 7": level7, "Level 8": level8, "Level 9": level9, "Level 10": level10, "Level 11": level11,
-    "Level 12": level12, "Level 13": level13, "Level 14": level14, "Level 15": level15, "Level 16": level16, 
-    "Level 19": level19, "Level 20": level20, "Level 23": level23, "Level 24": level24}
+    "Level 12": level12, "Level 13": level13, "Level 14": level14, "Level 15": level15, "Level 16": level16, "Level 17": level17, 
+    "Level 18": level18, "Level 19": level19, "Level 20": level20, "Level 21": level21, "Level 22": level22, 
+    "Level 23": level23, "Level 24": level24}
 var currentlevel = null;
 setlevel = function(lev) {
     currentlevel = levels[lev];
